@@ -1,0 +1,49 @@
+/* Hoja de estilos base. Cada pareja puede modificarla libremente. */
+
+.raiz {
+    -fx-background-color: #f5f7fa;
+    -fx-font-family: "System";
+    -fx-font-size: 14px;
+}
+
+.encabezado {
+    -fx-background-color: #1f3a5f;
+    -fx-padding: 16 24 16 24;
+    -fx-spacing: 4;
+}
+
+.titulo {
+    -fx-text-fill: white;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.subtitulo {
+    -fx-text-fill: #d6e2f0;
+}
+
+.seccion {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f3a5f;
+}
+
+.boton-principal {
+    -fx-background-color: #2f6db5;
+    -fx-text-fill: white;
+    -fx-pref-width: 140px;
+    -fx-cursor: hand;
+}
+
+.boton-principal:hover {
+    -fx-background-color: #24578f;
+}
+
+.pie {
+    -fx-padding: 8 24 8 24;
+    -fx-background-color: #e4e9f0;
+}
+
+.error {
+    -fx-text-fill: #b3261e;
+}
