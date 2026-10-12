@@ -70,5 +70,54 @@ public class GestorCitas {
  
     public void asignarServicio(String idProfesional, String codigoServicio) {
         buscarProfesional(idProfesional).agregarServicio(buscarServicio(codigoServicio));
-    }  
+    }
+    public Cita programarCita(String idCliente, String idProfesional, String codigoServicio,
+            LocalDateTime fechaHora) throws HorarioNoDisponible {
+        if (fechaHora == null) {
+            throw new IllegalArgumentException("Debe indicar la fecha y la hora.");
+        }
+        Cliente cliente = buscarCliente(idCliente);
+        Profesional profesional = buscarProfesional(idProfesional);
+        Servicio servicio = buscarServicio(codigoServicio);
+ 
+        if (!profesional.ofreceServicio(servicio)) {
+            throw new IllegalArgumentException(
+                    profesional.getNombre() + " no ofrece el servicio " + servicio.getNombre() + ".");
+        }
+        if (fechaHora.isBefore(LocalDateTime.now())) {
+            throw new HorarioNoDisponible("No se pueden programar citas en fechas pasadas.");
+        }
+        validarDisponibilidad(profesional, fechaHora, servicio, null);
+ 
+        Cita cita = new Cita(String.format("C-%03d", ++contadorCitas),
+                cliente, profesional, servicio, fechaHora);
+        citas.add(cita);
+        return cita;
+    }
+ 
+    public void cancelarCita(String idCita) throws CitaNoModificable {
+        buscarCita(idCita).cancelar();
+    }
+ 
+    public void reprogramarCita(String idCita, LocalDateTime nuevaFecha)
+            throws CitaNoModificable, HorarioNoDisponible {
+        Cita cita = buscarCita(idCita);
+        if (cita.getEstado() != EstadoCita.PROGRAMADA) {
+            throw new CitaNoModificable(
+                    "No se puede reprogramar una cita en estado " + cita.getEstado() + ".");
+        }
+        if (nuevaFecha == null || nuevaFecha.isBefore(LocalDateTime.now())) {
+            throw new HorarioNoDisponible("La nueva fecha no puede estar en el pasado.");
+        }
+        validarDisponibilidad(cita.getProfesional(), nuevaFecha, cita.getServicio(), cita);
+        cita.reprogramar(nuevaFecha);
+    }
+ 
+    public void marcarAtendida(String idCita) throws CitaNoModificable {
+        buscarCita(idCita).marcarAtendida();
+    }
+ 
+    public void marcarAusente(String idCita) throws CitaNoModificable {
+        buscarCita(idCita).marcarAusente();
+    }
 }
