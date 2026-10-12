@@ -120,4 +120,22 @@ public class GestorCitas {
     public void marcarAusente(String idCita) throws CitaNoModificable {
         buscarCita(idCita).marcarAusente();
     }
+    private void validarDisponibilidad(Profesional profesional, LocalDateTime inicio,
+            Servicio servicio, Cita ignorar) throws HorarioNoDisponible {
+        LocalDateTime fin = inicio.plusMinutes(servicio.getDuracionMinutos());
+        if (!profesional.atiendeEn(inicio, fin)) {
+            throw new HorarioNoDisponible("La cita queda fuera del horario de "
+                    + profesional.getNombre() + " (" + profesional.getHoraInicio()
+                    + " a " + profesional.getHoraFin() + ").");
+        }
+        for (Cita otra : citas) {
+            if (otra != ignorar
+                    && otra.getProfesional().equals(profesional)
+                    && otra.getEstado() == EstadoCita.PROGRAMADA
+                    && otra.traslapaCon(inicio, fin)) {
+                throw new HorarioNoDisponible(
+                        profesional.getNombre() + " ya tiene una cita en ese horario (" + otra.getId() + ").");
+            }
+        }
+    }
 }
