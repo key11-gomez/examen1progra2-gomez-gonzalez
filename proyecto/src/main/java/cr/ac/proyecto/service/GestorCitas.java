@@ -138,4 +138,93 @@ public class GestorCitas {
             }
         }
     }
+    public Cliente buscarCliente(String id) {
+        Cliente c = clientes.get(id);
+        if (c == null) {
+            throw new IllegalArgumentException("No existe un cliente con identificación " + id + ".");
+        }
+        return c;
+    }
+ 
+    public Profesional buscarProfesional(String id) {
+        Profesional p = profesionales.get(id);
+        if (p == null) {
+            throw new IllegalArgumentException("No existe un profesional con identificación " + id + ".");
+        }
+        return p;
+    }
+ 
+    public Servicio buscarServicio(String codigo) {
+        Servicio s = servicios.get(codigo);
+        if (s == null) {
+            throw new IllegalArgumentException("No existe un servicio con código " + codigo + ".");
+        }
+        return s;
+    }
+ 
+    public Cita buscarCita(String id) {
+        for (Cita c : citas) {
+            if (c.getId().equals(id)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException("No existe la cita " + id + ".");
+    }
+ 
+    public List<Cliente> listarClientes() {
+        return Collections.unmodifiableList(new ArrayList<>(clientes.values()));
+    }
+ 
+    public List<Profesional> listarProfesionales() {
+        return Collections.unmodifiableList(new ArrayList<>(profesionales.values()));
+    }
+ 
+    public List<Servicio> listarServicios() {
+        return Collections.unmodifiableList(new ArrayList<>(servicios.values()));
+    }
+ 
+    public List<Cita> listarCitas() {
+        return Collections.unmodifiableList(citas);
+    }
+ 
+    public List<Cita> listarCitasPorEstado(EstadoCita estado) {
+        List<Cita> r = new ArrayList<>();
+        for (Cita c : citas) {
+            if (c.getEstado() == estado) {
+                r.add(c);
+            }
+        }
+        return r;
+    }
+ 
+    public List<Cita> listarCitasPorProfesional(String idProfesional) {
+        List<Cita> r = new ArrayList<>();
+        for (Cita c : citas) {
+            if (c.getProfesional().getIdentificacion().equals(idProfesional)) {
+                r.add(c);
+            }
+        }
+        return r;
+    }
+ 
+    public List<Cita> listarCitasPorCliente(String idCliente) {
+        List<Cita> r = new ArrayList<>();
+        for (Cita c : citas) {
+            if (c.getCliente().getIdentificacion().equals(idCliente)) {
+                r.add(c);
+            }
+        }
+        return r;
+    }
+ 
+    public List<Profesional> listarProfesionalesPorServicio(String codigoServicio) {
+        Servicio s = buscarServicio(codigoServicio);
+        List<Profesional> r = new ArrayList<>();
+        for (Profesional p : profesionales.values()) {
+            if (p.ofreceServicio(s)) {
+                r.add(p);
+            }
+        }
+        return r;
+    }
 }
