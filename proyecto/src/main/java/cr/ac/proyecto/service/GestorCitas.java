@@ -227,4 +227,25 @@ public class GestorCitas {
         }
         return r;
     }
+    public void cargarDatosDePrueba() {
+        if (!clientes.isEmpty() || !profesionales.isEmpty()) {
+            return;
+        }
+        registrarCliente(new Cliente("1-1111-1111", "Ana Rojas", "8888-0001", "ana@correo.com", true));
+        registrarCliente(new Cliente("2-2222-2222", "Luis Mora", "8888-0002", "luis@correo.com", false));
+ 
+        registrarProfesional(new Profesional("3-3333-3333", "Dra. Carla Vega", "8888-0003",
+                "carla@clinica.com", Especialidad.MEDICINA_GENERAL, LocalTime.of(8, 0), LocalTime.of(16, 0)));
+        registrarProfesional(new Profesional("4-4444-4444", "Lic. Diego Solano", "8888-0004",
+                "diego@clinica.com", Especialidad.PSICOLOGIA, LocalTime.of(10, 0), LocalTime.of(18, 0)));
+ 
+        registrarServicio(new ServicioPresencial("S-01", "Consulta general", 30, 20000, 2000));
+        registrarServicio(new ServicioVirtual("S-02", "Consulta virtual", 30, 15000, "Zoom"));
+        registrarServicio(new ServicioPresencial("S-03", "Terapia psicológica", 60, 30000, 2000));
+ 
+        asignarServicio("3-3333-3333", "S-01");
+        asignarServicio("3-3333-3333", "S-02");
+        asignarServicio("4-4444-4444", "S-02");
+        asignarServicio("4-4444-4444", "S-03");
+    }
 }
