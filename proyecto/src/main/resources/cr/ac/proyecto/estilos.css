@@ -1,49 +1,97 @@
-/* Hoja de estilos base. Cada pareja puede modificarla libremente. */
 
 .raiz {
-    -fx-background-color: #f5f7fa;
+    -fx-background-color: #F3F7F5;
     -fx-font-family: "System";
     -fx-font-size: 14px;
+    -fx-text-fill: #34463D;
 }
 
+
 .encabezado {
-    -fx-background-color: #1f3a5f;
+    -fx-background-color: #005227; 
     -fx-padding: 16 24 16 24;
     -fx-spacing: 4;
 }
 
+
+.encabezado .label {
+    -fx-text-fill: #FFFFFF !important;
+}
+
 .titulo {
-    -fx-text-fill: white;
+    -fx-text-fill: #FFFFFF !important; 
     -fx-font-size: 22px;
     -fx-font-weight: bold;
 }
 
 .subtitulo {
-    -fx-text-fill: #d6e2f0;
+    -fx-text-fill: #A4FFF7 !important; 
 }
 
 .seccion {
     -fx-font-size: 18px;
     -fx-font-weight: bold;
-    -fx-text-fill: #1f3a5f;
+    -fx-text-fill: #005227;
 }
 
+
 .boton-principal {
-    -fx-background-color: #2f6db5;
-    -fx-text-fill: white;
+    -fx-background-color: #038554;
+    -fx-text-fill: #FFFFFF !important;
     -fx-pref-width: 140px;
     -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4px;
 }
 
 .boton-principal:hover {
-    -fx-background-color: #24578f;
+    -fx-background-color: #03BB85;
 }
 
 .pie {
     -fx-padding: 8 24 8 24;
-    -fx-background-color: #e4e9f0;
+    -fx-background-color: #DCEBE3; 
 }
 
 .error {
     -fx-text-fill: #b3261e;
+}
+
+
+.label {
+    -fx-text-fill: #34463D; 
+}
+
+
+.table-view {
+    -fx-background-color: #DCEBE3; 
+    -fx-table-cell-border-color: #68DDBD; 
+}
+
+.table-view .column-header {
+    -fx-background-color: #005227; 
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #FFFFFF !important; 
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-background-color: #FFFFFF; 
+    -fx-text-fill: #34463D;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #DCEBE3; 
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #03BB85; 
+    -fx-text-fill: #FFFFFF;
+}
+
+
+.table-view .empty-table {
+    -fx-text-fill: #34463D;
 }

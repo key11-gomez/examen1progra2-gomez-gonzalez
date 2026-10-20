@@ -19,7 +19,7 @@ public class PrincipalController {
 
     @FXML
     private void initialize() {
-        lblEstado.setText("Proyecto base listo. Adapte esta pantalla a su caso.");
+        lblEstado.setText("Gestion de clinica");
     }
 
     /**
